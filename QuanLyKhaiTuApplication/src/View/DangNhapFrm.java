@@ -50,6 +50,7 @@ public class DangNhapFrm extends javax.swing.JFrame implements ActionListener{
         jLabel3.setText("Mật khẩu:");
 
         txtTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTen.setText("admin");
 
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDangNhap.setText("Đăng nhập");
@@ -61,6 +62,7 @@ public class DangNhapFrm extends javax.swing.JFrame implements ActionListener{
         checkboxHienMK.setText("Hiện mật khẩu");
 
         txtMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMatKhau.setText("123");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Phường:");
@@ -211,7 +213,7 @@ public class DangNhapFrm extends javax.swing.JFrame implements ActionListener{
             if (resultSet.next()) {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
                 conn.close();
-                HomeFrm frm = new HomeFrm(phuong);
+                HomeFrm frm = new HomeFrm(phuong,quan);
                 this.dispose();
                 frm.setVisible(true);
             } else {
