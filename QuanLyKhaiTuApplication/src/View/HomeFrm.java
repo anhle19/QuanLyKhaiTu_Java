@@ -1,10 +1,10 @@
-
 package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,19 +16,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Pavilion 15
  */
 public class HomeFrm extends javax.swing.JFrame implements ActionListener {
-
+    
     private String phuong;
     private String quan;
     Connection conn;
     private DefaultTableModel tableModel;
-
     
     public HomeFrm() {
         initComponents();
         setLocationRelativeTo(null);
         addButton();
     }
-
+    
     public HomeFrm(String phuong, String quan) throws SQLException {
         initComponents();
         setLocationRelativeTo(null);
@@ -36,12 +35,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModel = (DefaultTableModel) tableQuanLyKhaiTu.getModel();
         this.phuong = phuong;
         this.quan = quan;
+        lbPhuong.setText("Phường: "+phuong);
+        lbQuan.setText("Quận: "+quan);
         String qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố\n"
                 + "From DanhSachKhaiTu \n"
-                + "Where Quận = '"+ this.quan +"' and Phường = '"+ this.phuong +"'";
+                + "Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "'";
         loadData(qry);
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -72,6 +72,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnCapNhat = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnChiTiet = new javax.swing.JButton();
+        lbPhuong = new javax.swing.JLabel();
+        lbQuan = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -243,6 +245,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnChiTiet.setText("Chi tiết");
 
+        lbPhuong.setText("Phường: ");
+
+        lbQuan.setText("Quận: ");
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("Đăng xuất");
@@ -264,19 +270,6 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelHome)
-                .addGap(395, 395, 395))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 160, Short.MAX_VALUE)
                 .addComponent(btnLamMoi)
@@ -289,12 +282,35 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 .addGap(72, 72, 72)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(151, 151, 151))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbPhuong)
+                        .addGap(43, 43, 43)
+                        .addComponent(lbQuan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelHome)
+                        .addGap(395, 395, 395))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(labelHome)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(labelHome))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbPhuong)
+                        .addComponent(lbQuan)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -320,7 +336,6 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         dangNhapFrm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -377,6 +392,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelHome;
+    private javax.swing.JLabel lbPhuong;
+    private javax.swing.JLabel lbQuan;
     private javax.swing.JRadioButton radioSapXepA_Z;
     private javax.swing.JRadioButton radioSapXepZ_A;
     private javax.swing.JRadioButton radioTimDiaChi;
@@ -394,26 +411,27 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnTimKiem.addActionListener(this);
         btnChiTiet.addActionListener(this);
         btnLamMoi.addActionListener(this);
-
+        
         buttonGroup1.add(radioSapXepA_Z);
         buttonGroup1.add(radioSapXepZ_A);
-
+        
         buttonGroup2.add(radioTimDiaChi);
         buttonGroup2.add(radioTimLyDo);
         buttonGroup2.add(radioTimTenNguoiMat);
-
+        
         radioSapXepA_Z.addActionListener(this);
         radioSapXepZ_A.addActionListener(this);
-
+        
         radioTimDiaChi.addActionListener(this);
         radioTimLyDo.addActionListener(this);
         radioTimTenNguoiMat.addActionListener(this);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
         if (obj.equals(btnLamMoi)) {
+            tableModel.setRowCount(0);
             ResetButton();
             String qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố\n"
                     + "From DanhSachKhaiTu \n"
@@ -424,31 +442,36 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(rootPane, "Lỗi!!!!");
             }
         } else if (obj.equals(btnKhaiBao)) {
-            KhaiBaoDialog khaiBaoDialog = new KhaiBaoDialog(this, rootPaneCheckingEnabled,phuong,quan);
-            khaiBaoDialog.setVisible(true);
+            KhaiBao();
         } else if (obj.equals(btnXoa)) {
-            
+            Xoa();
         } else if (obj.equals(btnCapNhat)) {
-            
-        } else if(obj.equals(btnChiTiet)){
-            int indexRow = tableQuanLyKhaiTu.getSelectedRow();
-            int id = (int) tableQuanLyKhaiTu.getValueAt(indexRow, 0);
-            if(id != -1){
-                ThongTinChiTietDialog thongTinChiTietDialog = new ThongTinChiTietDialog(this, rootPaneCheckingEnabled,id);
-                thongTinChiTietDialog.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn một dòng!!!!");
+            CapNhat();
+        } else if (obj.equals(btnChiTiet)) {
+            ChiTiet();
+        }else if(obj.equals(radioSapXepA_Z) || obj.equals(radioSapXepZ_A)){
+            try {
+                SapXep();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Lỗi dữ liệu!!!");
             }
+        }else if(obj.equals(btnTimKiem)){
+            try {
+                TimKiem();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Lỗi dữ liệu!!");
+            }
+                
         }
     }
-
+    
     private void loadData(String qry) throws SQLException {
-
+        
         try {
             conn = DriverManager.getConnection(DataConection.connectionUrl);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
-            while(rs.next()){
+            while (rs.next()) {
                 Object rowData[] = new Object[5];
                 rowData[0] = rs.getObject("ID");
                 rowData[1] = rs.getObject("Tên_người_mất");
@@ -463,7 +486,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             JOptionPane.showMessageDialog(rootPane, "Lỗi!!!!!");
         }
     }
-
+    
     private void ResetButton() {
         buttonGroup1.clearSelection();
         buttonGroup2.clearSelection();
@@ -471,5 +494,122 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         comboTo.setSelectedIndex(0);
         comboKhuPho.setSelectedIndex(0);
         comboLyDo.setSelectedIndex(0);
+    }
+
+    private void XoaKhaiTu(int id) {
+        try {
+                String qry = "Delete from DanhSachKhaiTu Where ID = '"+id+"'";
+                Connection conn = DriverManager.getConnection(DataConection.connectionUrl);
+                PreparedStatement stmt = conn.prepareStatement(qry);
+                int rowAffect = stmt.executeUpdate();
+                if (rowAffect != 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công!!");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Xóa thất bại!!!");
+                }
+                conn.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Lỗi!!!");
+            }
+    }
+
+    private void KhaiBao() {
+        KhaiBaoDialog khaiBaoDialog = new KhaiBaoDialog(this, rootPaneCheckingEnabled, phuong, quan);
+        khaiBaoDialog.setVisible(true);
+    }
+
+    private void CapNhat() {
+        int indexRow = tableQuanLyKhaiTu.getSelectedRow();
+        int id = (int) tableQuanLyKhaiTu.getValueAt(indexRow, 0);
+        if (id != -1) {
+            CapNhatDialog capNhatDialog = new CapNhatDialog(this, rootPaneCheckingEnabled, id);
+            capNhatDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn một dòng!!!!");
+        }
+    }
+
+    private void ChiTiet() {
+        int indexRow = tableQuanLyKhaiTu.getSelectedRow();
+        int id = (int) tableQuanLyKhaiTu.getValueAt(indexRow, 0);
+        if (id != -1) {
+            ThongTinChiTietDialog thongTinChiTietDialog = new ThongTinChiTietDialog(this, rootPaneCheckingEnabled, id);
+            thongTinChiTietDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn một dòng!!!!");
+        }
+    }
+
+    private void Xoa() {
+        int indexRow = tableQuanLyKhaiTu.getSelectedRow();
+        int id = (int) tableQuanLyKhaiTu.getValueAt(indexRow, 0);
+        if (id != -1) {
+            XoaKhaiTu(id);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn một dòng!!!!");
+        }
+    }
+
+    private void SapXep() throws SQLException {
+        String qry = "";
+        if (radioSapXepA_Z.isSelected()) {
+            tableModel.setRowCount(0);
+            qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố "
+                    + "From DanhSachKhaiTu Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "'"
+                    + "Order by FirstName ASC";
+            loadData(qry);
+        } else if (radioSapXepZ_A.isSelected()) {
+            tableModel.setRowCount(0);
+            qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố "
+                    + "From DanhSachKhaiTu Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "'"
+                    + "Order by FirstName DESC";
+            loadData(qry);
+        }
+    }
+
+    private void TimKiem() throws SQLException {
+        if (radioTimDiaChi.isSelected() || radioTimLyDo.isSelected() || radioTimTenNguoiMat.isSelected()) {
+            if (radioTimDiaChi.isSelected()) {
+                TimTheoDiaChi();
+            } else if (radioTimLyDo.isSelected()) {
+                TimTheoLyDo();
+            } else if (radioTimTenNguoiMat.isSelected()) {
+                TimTheoTen();
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn một mục để tìm kiếm!!!");
+        }
+    }
+
+    private void TimTheoDiaChi() throws SQLException {
+        String to = comboTo.getSelectedItem().toString();
+        String khuPho = comboKhuPho.getSelectedItem().toString();
+        String qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố\n"
+                + "From DanhSachKhaiTu \n"
+                + "Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "' and Tổ = '" + to + "' and Khu_phố = '" + khuPho + "'";
+        tableModel.setRowCount(0);
+        loadData(qry);
+    }
+
+    private void TimTheoLyDo() throws SQLException {
+        String lyDo = comboLyDo.getSelectedItem().toString();
+        String qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố\n"
+                + "From DanhSachKhaiTu \n"
+                + "Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "' and Lý_do_mất = '"+lyDo+"'";
+        tableModel.setRowCount(0);
+        loadData(qry);
+    }
+
+    private void TimTheoTen() throws SQLException {
+        String ten = txtTenNguoiMat.getText();
+        if(!"".equals(ten)){
+            String qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố\n"
+                + "From DanhSachKhaiTu \n"
+                + "Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "' and Tên_người_mất Like '%"+ten+"%'";
+        tableModel.setRowCount(0);
+        loadData(qry);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập tên!");
+        }
     }
 }
