@@ -1,6 +1,7 @@
 
 package View;
 
+import Model.DataConection;
 import Model.FirstName;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,7 +65,7 @@ public class CapNhatDialog extends javax.swing.JDialog implements ActionListener
         txtNgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         comboLyDoMat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        comboLyDoMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Già", "Bệnh", "Tử hình", "Tự Sát", "Tai nạn giao thông" }));
+        comboLyDoMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Già", "Bệnh", "Khác", " " }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Giới tính:");

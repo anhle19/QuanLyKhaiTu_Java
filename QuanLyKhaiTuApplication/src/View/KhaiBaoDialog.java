@@ -1,5 +1,6 @@
 package View;
 
+import Model.DataConection;
 import Model.FirstName;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -118,7 +119,7 @@ public class KhaiBaoDialog extends javax.swing.JDialog implements ActionListener
         comboKhuPho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", " " }));
 
         comboLyDoMat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        comboLyDoMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Già", "Bệnh", "Tử hình", "Tự Sát", "Tai nạn giao thông" }));
+        comboLyDoMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Già", "Bệnh", "Khác" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,8 +161,7 @@ public class KhaiBaoDialog extends javax.swing.JDialog implements ActionListener
                             .addGap(155, 155, 155)
                             .addComponent(btnKhaiBao)
                             .addGap(46, 46, 46)
-                            .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(32, 32, 32)

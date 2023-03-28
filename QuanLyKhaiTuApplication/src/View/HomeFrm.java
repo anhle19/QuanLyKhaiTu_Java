@@ -1,5 +1,6 @@
 package View;
 
+import Model.DataConection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -106,7 +107,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         comboKhuPho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", " " }));
 
         comboLyDo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        comboLyDo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Già", "Bệnh", "Tử hình", "Tự Sát", "Tai nạn giao thông" }));
+        comboLyDo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Già", "Bệnh", "Khác" }));
 
         txtTenNguoiMat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -491,9 +492,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroup1.clearSelection();
         buttonGroup2.clearSelection();
         txtTenNguoiMat.setText("");
-        comboTo.setSelectedIndex(0);
-        comboKhuPho.setSelectedIndex(0);
-        comboLyDo.setSelectedIndex(0);
+//        comboTo.setSelectedIndex(0);
+//        comboKhuPho.setSelectedIndex(0);
+//        comboLyDo.setSelectedIndex(0);
     }
 
     private void XoaKhaiTu(int id) {
@@ -595,9 +596,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         String lyDo = comboLyDo.getSelectedItem().toString();
         String qry = "Select ID, Tên_người_mất, Lý_do_mất, Tổ, Khu_phố\n"
                 + "From DanhSachKhaiTu \n"
-                + "Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "' and Lý_do_mất = '"+lyDo+"'";
+                + "Where Quận = '" + this.quan + "' and Phường = '" + this.phuong + "' and Lý_do_mất Like '%"+lyDo+"%'";
         tableModel.setRowCount(0);
         loadData(qry);
+        if(tableModel.getRowCount()==0){
+            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy!!!");
+        }
     }
 
     private void TimTheoTen() throws SQLException {

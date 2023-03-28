@@ -1,6 +1,7 @@
 
 package View;
 
+import Model.DataConection;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
